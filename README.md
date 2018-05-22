@@ -1,2 +1,2 @@
 # print
-this will allow to selecta bee printer and print
+this will allow to select a ble printer and print "Hello world"
