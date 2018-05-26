@@ -26,7 +26,15 @@ int printedCount = 0 ;
     printedCount = 0 ;
     //  get the printer name // we have preselected the mane and saved it somevare
     selectedPrinter =[Print getPrinter];
-    _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    if(_centralManager == nil){
+        _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    }else{
+        if (_centralManager.state != CBManagerStatePoweredOn) {
+            [self closeWithError];
+            return;
+        }
+        [self scan];
+    }
     // And somewhere to store the incoming data
     _data = [[NSMutableData alloc] init];
 }

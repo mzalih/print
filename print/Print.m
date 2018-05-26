@@ -34,6 +34,9 @@ NSString *selectedName;
 -(void)selectPrinter{
     selectedName = [Print getPrinter];
     _availablePeripheralList =[[NSMutableArray alloc]init];
+    if(selecatableTableView){
+        [self hideTable];
+    }
      [self loadTable];
     _bleCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
    
@@ -43,7 +46,7 @@ NSString *selectedName;
     if(selecatableTableView){
         [selecatableTableView reloadData];
     }else{
-        selecatableTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, _parentVPC.view.frame.size.width/2, _parentVPC.view.frame.size.height/2) style:UITableViewStylePlain];
+        selecatableTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 400) style:UITableViewStylePlain];
         
         selecatableTableView.center = _parentVPC.view.center;
         
@@ -101,16 +104,15 @@ NSString *selectedName;
         
         perif =_availablePeripheralList[indexPath.row];
         if([self isSelectedPrinter:perif]){
-         //   cell.backgroundColor = UIColorFromRGB(0x196D44);
+            cell.backgroundColor = [UIColor greenColor];
             cell.textLabel.textColor = [UIColor whiteColor];
         }else{
             cell.backgroundColor = [UIColor grayColor];
             cell.textLabel.textColor = [UIColor blackColor];
-            
         }
         
     }else{
-      //  cell.backgroundColor = UIColorFromRGB(0xF65646);
+        cell.backgroundColor = [UIColor redColor];
         cell.textLabel.textColor = [UIColor whiteColor];
     
     }
